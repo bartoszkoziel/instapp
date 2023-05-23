@@ -1,6 +1,6 @@
-const doesTagExist = (tagsTab, name) => {
+const getTagByName = (tagsTab, name) => {
    tagsTab.forEach((item) => {
-      if (item.name == name) return 1
+      if (item.name == name) return 
    })
 
    return 0
@@ -14,4 +14,4 @@ const getPhotoById = (photosTab, id) => {
    return 0
 }
 
-module.exports = { doesTagExist, getPhotoById }
+module.exports = { getTagByName, getPhotoById }

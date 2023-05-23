@@ -2,6 +2,7 @@ const formidable = require("formidable")
 const path = require("path")
 const fs = require("fs")
 
+const tagsModel = require("./tagsModel")
 let { photosTab, currId } = require("./imgModel")
 const utils = require("./utils")
 
@@ -40,12 +41,12 @@ const saveImg = (req, res) => {
 const getImg = (res, id) => {
     if (id == -1) {
         res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify(photosTab), null, 2)
+        res.end(JSON.stringify(photosTab, null, 2))
     } else {
         photosTab.forEach((item) => {
             if (item.id == id) {
                 res.writeHead(200, { 'Content-Type': 'application/json' })
-                res.end(JSON.stringify(item), null, 2)
+                res.end(JSON.stringify(item, null, 2))
             }
         })
     }
@@ -92,30 +93,43 @@ const patchImg = (req, res, id) => {
 // DO POPRAWY CALA CZĘŚĆ Z OTAGOWANIEM ZDJEC!!!
 
 const tagImg = (req, res, imgId) => {
-    const tagsController = require("./tagsController")
-    const tagsModel = require("./tagsModel")
 
-    let tag = ""
+    let nazwaTagu = ""
     req.on("data", (data) => {
-        body = data.toString()
+        nazwaTagu = data.toString()
     })
 
     req.on("end", () => {
-        tag = JSON.parse(tag)
+        nazwaTagu = JSON.parse(nazwaTagu).name
+        let tagObj = tagsModel.tagsTab.find(el => el.name == nazwaTagu)
 
-        let index = -1
-        photosTab.forEach((item, i) => {
-            if (item.id == imgId) {
-                index = i
-            }
-        })
+        if (tagObj == undefined) {
+            tagsModel.tagsTab.push({
+                id: tagsModel,
+                name: nazwaTagu,
+                popularity: 1
+            })
 
-        if (utils.doesTagExist(tagsModel.tagsTab, tag.name) && index != -1) {
-            photosTab[index].tags.push({
-                name: tag.name,
-                popularity: tag.popularity
+            let img = photosTab.find(el => el.id == imgId)
+            img.tags.push({
+                name: nazwaTagu,
+                popularity: 1
+            })
+
+            currId++
+        } 
+        
+        else {
+
+            let img = photosTab.find(el => el.id == imgId)
+            img.tags.push({
+                name: tagObj.name,
+                popularity: tagObj.popularity + 1
             })
         }
+
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.end()
     })
 }
 
@@ -127,8 +141,13 @@ const getImgTags = (res, id) => {
         res.end(JSON.stringify({
             id: photo.id,
             tags: photo.tags
-        }), null, 2)
+        }, null, 2))
+        return
     }
+
+    res.writeHead(404, { 'Content-Type': 'text/plain' })
+    res.end()
+    return
 }
 
-module.exports = { saveImg, getImg, delImg, patchImg }
+module.exports = { saveImg, getImg, delImg, patchImg, getImgTags, tagImg }

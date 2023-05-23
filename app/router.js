@@ -50,17 +50,24 @@ const router = (req, res) => {
 
     // TAGS ROUTER
     else if (req.url.search("/api/tags") != -1) {
+
         if (req.method == "GET" && req.url == "/api/tags/raw") {
             tagsController.getTagsRaw(res)
             logger.info("GET /api/tags/raw")
-        } else if (req.method == "GET" && req.url == "/api/tags") {
+        }
+
+        else if (req.method == "GET" && req.url == "/api/tags") {
             tagsController.getTags(res, -1)
             logger.info("GET /api/tags")
-        } else if (req.method == "GET" && req.url.match(/\/api\/tags\/([0-9]+)/)) {
+        }
+
+        else if (req.method == "GET" && req.url.match(/\/api\/tags\/([0-9]+)/)) {
             let id = req.url.split("/")[3]
             tagsController.getTags(res, id)
-            logger.info("GET /api/tags" + id)
-        } else if (req.method == "POST" && req.url == "/api/tags") {
+            logger.info("GET /api/tags/" + id)
+        }
+
+        else if (req.method == "POST" && req.url == "/api/tags") {
             tagsController.addTag(req, res)
             logger.info("POST /api/tags")
         }

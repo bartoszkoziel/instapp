@@ -1,6 +1,6 @@
 const formidable = require("formidable")
 
-const { tagsTab, currId } = require("./tagsModel")
+let { tagsTab, currId } = require("./tagsModel")
 const utils = require("./utils")
 
 const getTagsRaw = (res) => {
@@ -10,18 +10,18 @@ const getTagsRaw = (res) => {
     })
 
     res.writeHead(200, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify(tempTab), null, 2)
+    res.end(JSON.stringify(tempTab, null, 2))
 }
 
 const getTags = (res, id) => {
     if (id == -1) {
         res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify(tagsTab), null, 2)
+        res.end(JSON.stringify(tagsTab, null, 2))
     } else {
         tagsTab.forEach((item) => {
             if (item.id == id) {
                 res.writeHead(200, { 'Content-Type': 'application/json' })
-                res.end(JSON.stringify(item), null, 2)
+                res.end(JSON.stringify(item, null, 2))
             }
         })
     }
@@ -36,12 +36,14 @@ const addTag = (req, res) => {
     req.on("end", () => {
         body = JSON.parse(body)
 
-        if (!utils.doesTagExist(tagsTab, body.name)) {
+        if (tagsTab.find(el => el.name == body.name) == undefined) {
             tagsTab.push({
                 id: currId,
                 name: body.name,
                 popularity: body.popularity
             })
+
+            currId++
 
             res.writeHead(200, { 'Content-Type': 'application/json' })
             res.end()
