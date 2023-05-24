@@ -105,7 +105,7 @@ const tagImg = (req, res, imgId) => {
 
         if (tagObj == undefined) {
             tagsModel.tagsTab.push({
-                id: tagsModel,
+                id: tagsModel.currId,
                 name: nazwaTagu,
                 popularity: 1
             })
@@ -117,8 +117,8 @@ const tagImg = (req, res, imgId) => {
             })
 
             currId++
-        } 
-        
+        }
+
         else {
 
             let img = photosTab.find(el => el.id == imgId)
