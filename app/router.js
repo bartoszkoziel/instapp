@@ -1,5 +1,6 @@
 const fileController = require("./imgController")
 const tagsController = require("./tagsController")
+const userController = require("./userController")
 const logger = require("tracer").colorConsole()
 
 const router = (req, res) => {
@@ -34,7 +35,6 @@ const router = (req, res) => {
             logger.info("PATCH /api/photos" + id)
         }
 
-        // DO POPRAWY
         else if (req.method == "PATCH" && req.url.match(/\/api\/photos\/tags\/([0-9]+)/)) {
             let id = req.url.split("/")[4]
             fileController.tagImg(req, res, id)
@@ -70,6 +70,28 @@ const router = (req, res) => {
         else if (req.method == "POST" && req.url == "/api/tags") {
             tagsController.addTag(req, res)
             logger.info("POST /api/tags")
+        }
+    }
+
+    // USER ROUTER
+    else if (req.url.search("/api/user") != -1) {
+        if (req.method == "POST" && req.url == "/api/user/register") {
+            userController.register(req, res)
+            logger.info("POST /api/user/register")
+        }
+
+        else if (req.method == "GET" && req.url.match(/\/api\/user\/confirm\/(.*)/)) {
+            let token = req.url.split("/")[4]
+
+            logger.info("GET /api/user/confirm/", "TOKEN: ", token)
+        }
+
+        else if (req.method == "POST" && req.url == "/api/user/login") {
+
+        }
+        
+        else if (req.method == "GET" && req.url == "/api/user") {
+            
         }
     }
 }
