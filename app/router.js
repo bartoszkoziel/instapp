@@ -82,16 +82,18 @@ const router = (req, res) => {
 
         else if (req.method == "GET" && req.url.match(/\/api\/user\/confirm\/(.*)/)) {
             let token = req.url.split("/")[4]
-
-            logger.info("GET /api/user/confirm/", "TOKEN: ", token)
+            userController.verify(res, token)
+            logger.info("GET /api/user/confirm")
         }
 
         else if (req.method == "POST" && req.url == "/api/user/login") {
-
+            userController.login(req, res)
+            logger.info("POST /api/user/login")
         }
-        
+
         else if (req.method == "GET" && req.url == "/api/user") {
-            
+            userController.getAllUsers(res)
+            logger.info("GET /api/user")
         }
     }
 }
