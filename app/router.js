@@ -1,6 +1,8 @@
 const fileController = require("./imgController")
 const tagsController = require("./tagsController")
 const userController = require("./userController")
+const profileController = require("./profileController")
+
 const logger = require("tracer").colorConsole()
 
 const router = (req, res) => {
@@ -94,6 +96,26 @@ const router = (req, res) => {
         else if (req.method == "GET" && req.url == "/api/user") {
             userController.getAllUsers(res)
             logger.info("GET /api/user")
+        }
+    }
+
+    // PROFILE ROUTER
+    else if (req.url.search("/api/profile") != -1) {
+        if (req.method == "GET" && req.url == "/api/profile") {
+            profileController.getProfile(req, res)
+            logger.info("GET /api/profile")
+        }
+
+        else if (req.method == "PATCH" && req.url == "/api/profile") {
+
+        }
+
+        else if (req.method == "POST" && req.url == "/api/profile") {
+
+        }
+
+        else if(req.method == "GET" && req.url == "/api/profile/logout") {
+
         }
     }
 }
