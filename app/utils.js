@@ -48,7 +48,7 @@ const verifyToken = (token) => {
    return new Promise( async (resolve, reject) => {
       try {
          let decoded = await jwt.verify(token, process.env.VERY_SECRET_KEY)
-         console.log({ decoded: decoded })
+
          resolve(decoded)
       }
       catch (ex) {

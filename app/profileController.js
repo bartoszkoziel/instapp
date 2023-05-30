@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken")
 const utils = require("./utils")
 
+let { usersTab, currId } = require("./userModel")
+
 require("dotenv").config()
 
 module.exports = {
@@ -13,7 +15,11 @@ module.exports = {
       }
 
       let token = req.headers.authorization.split(" ")[1]
-      if(utils.verifyToken(token).isFulfilled)
-
+      
+      try {
+         console.log(utils.verifyToken(token))
+      } catch(ex){
+         console.log(ex)
+      }
    }
 }

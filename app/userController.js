@@ -48,7 +48,6 @@ const verify = async (res, token) => {
 }
 
 const login = async (req, res) => {
-    console.log("BANG")
     let credentials = await utils.getReqJSON(req)
     let userCurr = usersTab.find(el => el.email == credentials.email)
 
@@ -58,9 +57,10 @@ const login = async (req, res) => {
         return
     }
 
-    let token = await jwt.sign(userObj, process.env.VERY_SECRET_KEY, { expiresIn: "30m" })
+    let token = await jwt.sign(userCurr, process.env.VERY_SECRET_KEY, { expiresIn: "1h" })
 
-    token
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    res.end(JSON.stringify({token: token}))
 
 }
 
