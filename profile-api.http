@@ -1,0 +1,12 @@
+### GET - profile data
+GET http://localhost:3000/api/profile HTTP/1.1
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZmlyc3ROYW1lIjoiSmFuMiIsImxhc3ROYW1lIjoiS293YTNsc2tpIiwiZW1haWwiOiJ1c2VyMTIzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JGEzaVBzbVpQbFFJMms4RE16OXgwbS5IcTVQQkhIUEh4S0NzT2sxbDRVVlNKMVJCRUdmQm1LIiwiY29uZmlybWVkIjp0cnVlLCJpYXQiOjE2ODU2MDkyOTEsImV4cCI6MTY4NTYxMjg5MX0.y-4Mq8Zu6OMwz2miWbdmK8p5orUedBkBoWZthMz2AoU
+
+### PATCH - profile data
+PATCH http://localhost:3000/api/profile HTTP/1.1
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZmlyc3ROYW1lIjoiSmFuMiIsImxhc3ROYW1lIjoiS293YTNsc2tpIiwiZW1haWwiOiJ1c2VyMTIzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JHJnOW9Ma2hZSm9iQ1RmMFFsUFpOOS5oQktKTk4vZkpjNWF0OFZJdUpUT3dxejduN0gxYXMuIiwiY29uZmlybWVkIjp0cnVlLCJpYXQiOjE2ODU2MDY3NjMsImV4cCI6MTY4NTYxMDM2M30.ttMxaOWmMrm3yIaiwTanNUI5uyEhcS3JlCUua2d0eH4
+
+{
+    "firstName": "ajaj"
+}

@@ -107,7 +107,8 @@ const router = (req, res) => {
         }
 
         else if (req.method == "PATCH" && req.url == "/api/profile") {
-
+            profileController.patchProfile(req, res)
+            logger.info("PATCH /api/profile")
         }
 
         else if (req.method == "POST" && req.url == "/api/profile") {

@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs")
 require("dotenv").config()
+const jwt = require("jsonwebtoken")
 
 const getTagByName = (tagsTab, name) => {
    tagsTab.forEach((item) => {
@@ -27,7 +28,11 @@ const getReqJSON = (req) => {
          })
 
          req.on("end", () => {
+            if (body == "") {
+               return resolve("no data to collect")
+            }
             resolve(JSON.parse(body))
+
          })
       } catch (error) {
          reject(error)
@@ -44,13 +49,13 @@ const decryptPass = (userpass, encrypted) => {
 }
 
 const verifyToken = (token) => {
+   return new Promise(async (resolve, reject) => {
 
-   return new Promise( async (resolve, reject) => {
       try {
          let decoded = await jwt.verify(token, process.env.VERY_SECRET_KEY)
-
          resolve(decoded)
       }
+
       catch (ex) {
          reject({ message: ex.message })
       }

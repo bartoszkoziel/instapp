@@ -5,13 +5,12 @@ Content-Type: application/json
 {
     "firstName": "Jan2",
     "lastName": "Kowa3lski",
-    "email": "user12@gmail.com",
+    "email": "user123@gmail.com",
     "password": "QWERTY1234"
 }
 
 ### GET - confirm account
-GET http://localhost:3000/api/user/confirm/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZmlyc3ROYW1lIjoiSmFuIiwibGFzdE5hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoidXNlcjJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMDgkc2FFWjFGVGVCUE5ERTlZRmExYmJ1LmI0OTUzclF2MEZXOTNxMzhuZXQ5cm5YOXBXMFFTMGEiLCJjb25maXJtZWQiOmZhbHNlLCJpYXQiOjE2ODUyMTMzNTAsImV4cCI6MTY4NTIxMzM4MH0.QfKFEwr4WC6K3RBFyVH2LcTL7CW_3Lrq3HeL-Bdas7k
-
+GET http://localhost:3000/api/user/confirm/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZmlyc3ROYW1lIjoiSmFuMiIsImxhc3ROYW1lIjoiS293YTNsc2tpIiwiZW1haWwiOiJ1c2VyMTIzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JGEzaVBzbVpQbFFJMms4RE16OXgwbS5IcTVQQkhIUEh4S0NzT2sxbDRVVlNKMVJCRUdmQm1LIiwiY29uZmlybWVkIjpmYWxzZSwiaWF0IjoxNjg1NjA5MjczLCJleHAiOjE2ODU2MDkzMDN9.3th90ncrPlOHPwjSQgwypG_pmwoW4TrwIAgPIxIFerM
 ### GET - all users
 GET http://localhost:3000/api/user HTTP/1.1
 
@@ -20,6 +19,6 @@ POST http://localhost:3000/api/user/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "user2@gmail.com",
-    "password": "QWERTY123"
+    "email": "user123@gmail.com",
+    "password": "QWERTY1234"
 }
