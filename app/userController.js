@@ -1,5 +1,6 @@
 const utils = require("./utils")
 const jwt = require("jsonwebtoken")
+const path = require("path")
 require("dotenv").config()
 
 let { usersTab, currId } = require("./userModel")
@@ -19,13 +20,14 @@ const register = async (req, res) => {
         lastName: reqUser.lastName,
         email: reqUser.email,
         password: utils.encryptPassword(reqUser.password),
+        pfp: path.join(__dirname, "pfp", "default.jpg"),
         confirmed: false
     }
 
     usersTab.push(userObj)
     currId++
 
-    let token = await jwt.sign(userObj, process.env.VERY_SECRET_KEY, { expiresIn: "30s" })
+    let token = await jwt.sign(userObj, process.env.VERY_SECRET_KEY, { expiresIn: "50s" })
 
     res.writeHead(200, { 'Content-Type': 'text/plain' })
     res.end("PLEASE CONFIRM YOUR ACCOUNT WITH THIS LINK \n http://localhost:3000/api/user.confirm/" + token)
@@ -57,7 +59,7 @@ const login = async (req, res) => {
         return
     }
 
-    let token = await jwt.sign(userCurr, process.env.VERY_SECRET_KEY, { expiresIn: "1h" })
+    let token = await jwt.sign(userCurr, process.env.VERY_SECRET_KEY, { expiresIn: "12h" })
 
     res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(JSON.stringify({token: token}))

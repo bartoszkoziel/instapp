@@ -112,11 +112,13 @@ const router = (req, res) => {
         }
 
         else if (req.method == "POST" && req.url == "/api/profile") {
-
+            profileController.postProfilePicture(req, res)
+            logger.info("POST /api/profile")
         }
 
         else if(req.method == "GET" && req.url == "/api/profile/logout") {
-
+            profileController.logout(req, res)
+            logger.info("GET /api/profile/logout")
         }
     }
 }
