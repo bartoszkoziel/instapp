@@ -30,7 +30,7 @@ const register = async (req, res) => {
     let token = await jwt.sign(userObj, process.env.VERY_SECRET_KEY, { expiresIn: "50s" })
 
     res.writeHead(200, { 'Content-Type': 'text/plain' })
-    res.end("PLEASE CONFIRM YOUR ACCOUNT WITH THIS LINK \n http://localhost:3000/api/user.confirm/" + token)
+    res.end("PLEASE CONFIRM YOUR ACCOUNT WITH THIS LINK \n http://localhost:3000/api/user/confirm/" + token)
 }
 
 const verify = async (res, token) => {
