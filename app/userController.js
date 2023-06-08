@@ -59,7 +59,7 @@ const login = async (req, res) => {
         return
     }
 
-    let token = await jwt.sign(userCurr, process.env.VERY_SECRET_KEY, { expiresIn: "12h" })
+    let token = await jwt.sign(userCurr, process.env.VERY_SECRET_KEY, { expiresIn: "1h" })
 
     res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(JSON.stringify({token: token}))

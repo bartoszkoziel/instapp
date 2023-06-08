@@ -1,6 +1,7 @@
 const utils = require("./utils")
 const formidable = require("formidable")
 const path = require("path")
+const fs = require("fs")
 
 let { usersTab, currId } = require("./userModel")
 
@@ -128,5 +129,21 @@ module.exports = {
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end()
         return
+    },
+
+    getPfp: async (req, res, id) => {
+        let userProfile = await usersTab.find(el => el.id == id)
+
+        if (userProfile == undefined) {
+            res.writeHead(400, { 'Content-Type': 'text/plain' })
+            res.end("no user")
+            return
+        }
+
+        let profilePicture = fs.readFileSync(userProfile.pfp)
+
+        res.writeHead(200, { 'Content-Type': 'image/jpg' })
+        res.end(profilePicture)
+
     }
 }

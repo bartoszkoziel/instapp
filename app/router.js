@@ -120,6 +120,12 @@ const router = (req, res) => {
             profileController.logout(req, res)
             logger.info("GET /api/profile/logout")
         }
+
+        else if(req.method == "GET" && req.url.match(/\/api\/profile\/pfp\/([0-9]+)/)) {
+            let id = req.url.split("/")[4]
+            profileController.getPfp(req, res, id)
+            logger.info("GET /api/profile/pfp")
+        }
     }
 }
 
