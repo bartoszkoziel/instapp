@@ -134,6 +134,8 @@ module.exports = {
     getPfp: async (req, res, id) => {
         let userProfile = await usersTab.find(el => el.id == id)
 
+        console.log("ID : ", id)
+
         if (userProfile == undefined) {
             res.writeHead(400, { 'Content-Type': 'text/plain' })
             res.end("no user")
