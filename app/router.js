@@ -116,17 +116,28 @@ const router = (req, res) => {
             logger.info("POST /api/profile")
         }
 
-        else if(req.method == "GET" && req.url == "/api/profile/logout") {
+        else if (req.method == "GET" && req.url == "/api/profile/logout") {
             profileController.logout(req, res)
             logger.info("GET /api/profile/logout")
         }
 
-        else if(req.method == "GET" && req.url.match(/\/api\/profile\/pfp\/([0-9]+).*/)) {
+        else if (req.method == "GET" && req.url.match(/\/api\/profile\/pfp\/([0-9]+).*/)) {
             let id = req.url.split("/")[4][0]
             profileController.getPfp(req, res, id)
             logger.info("GET /api/profile/pfp")
         }
     }
+
+    // PROFILE ROUTER
+    else if (req.url.search("/api/getfile") != -1) {
+        if (req.method == "GET" && req.url.match(/\/api\/getfile\/([0-9]+)/)) {
+            let id = req.url.split("/")[3]
+            fileController.getPhotoById(res, id)
+            logger.info("GET /api/getfile")
+        }
+    }
+
+    //getPhotoById(res, id)
 }
 
 module.exports = router

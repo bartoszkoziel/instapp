@@ -90,8 +90,6 @@ const patchImg = (req, res, id) => {
     return
 }
 
-// DO POPRAWY CALA CZĘŚĆ Z OTAGOWANIEM ZDJEC!!!
-
 const tagImg = (req, res, imgId) => {
 
     let nazwaTagu = ""
@@ -150,4 +148,20 @@ const getImgTags = (res, id) => {
     return
 }
 
-module.exports = { saveImg, getImg, delImg, patchImg, getImgTags, tagImg }
+const getPhotoById = (res, id) => {
+    let photoJSON = photosTab.find(el => el.id == id)
+
+    if(photoJSON == undefined){
+        res.writeHead(404, { 'Content-Type': 'text/plain' })
+        res.end("Image with this ID doesn't exist")
+        return
+    }
+
+    let img = fs.readFileSync(photoJSON.url)
+
+    res.writeHead(200, { 'Content-Type': 'image/jpg' })
+    res.end(img)
+
+}
+
+module.exports = { saveImg, getImg, delImg, patchImg, getImgTags, tagImg, getPhotoById }

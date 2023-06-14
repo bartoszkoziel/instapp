@@ -52,6 +52,7 @@ module.exports = {
         }
 
         let newCredentials = await utils.getReqJSON(req)
+        console.log(await newCredentials)
 
         let userProfile = usersTab.find(el => el.id == decoded.id)
 
@@ -146,6 +147,5 @@ module.exports = {
 
         res.writeHead(200, { 'Content-Type': 'image/jpg' })
         res.end(profilePicture)
-
     }
 }
